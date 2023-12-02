@@ -12,7 +12,7 @@ bool isEmpty()
 
 bool isFull()
 {
-    return rear == n - 1;
+    return (rear + 1) % n == front;
 }
 
 void enqueue(int data)
@@ -25,8 +25,10 @@ void enqueue(int data)
         queue[rear] = data;
     }
     else
-        queue[++rear] = data;
-    // queue[(rear + 1) % n] = data; -> For circular queue
+    {
+        rear = (rear + 1) % n;
+        queue[rear] = data;
+    }
 }
 
 int dequeue()
@@ -40,8 +42,10 @@ int dequeue()
         front = rear = -1;
     }
     else
-        data = queue[front++];
-    // data = queue[(front + 1) % n] -> For circular queue
+    {
+        data = queue[front];
+        front = (front + 1) % n;
+    }
     return data;
 }
 
@@ -51,9 +55,9 @@ void display()
         cout << "Queue Underflow" << endl;
     else
     {
-        for (int i = front; i <= rear; i++)
+        for (int i = front; i != rear; i = (i + 1) % n)
             cout << queue[i] << " ";
-        cout << endl;
+        cout << queue[rear] << endl;
     }
 }
 
@@ -67,9 +71,12 @@ int main()
     enqueue(10);
     enqueue(20);
     enqueue(30);
+    enqueue(40);
+    enqueue(50);
     display();
     cout << dequeue() << endl;
     cout << peek() << endl;
+    enqueue(60);
     display();
     return 0;
 }

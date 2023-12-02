@@ -7,7 +7,7 @@ struct student
     int roll_no;
     float cgpa;
 };
-
+    
 int main()
 {
     int n = 3;

@@ -21,9 +21,7 @@ void insertStart(int data)
     ptr->data = data;
     ptr->prev = NULL;
     if (isEmpty())
-    {
         ptr->next = NULL;
-    }
     else
     {
         head->prev = ptr;
@@ -83,9 +81,9 @@ void deleteEnd()
 }
 
 void deleteMiddle(int pos)
-{   
+{
     struct Node *ptr = head;
-    for (int i=0; i<pos -1; i++)
+    for (int i = 0; i < pos - 1; i++)
         ptr = ptr->next;
     ptr->next = ptr->next->next;
     free(ptr->next->prev);
@@ -123,7 +121,7 @@ int main()
     insertStart(20);
     insertStart(30);
     insertEnd(40);
-    insertMiddle(50, 1);
+    insertMiddle(50, 2);
     traverse();
     insertMiddle(60, 3);
     traverse();

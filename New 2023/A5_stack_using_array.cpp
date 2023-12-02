@@ -28,8 +28,10 @@ void push(int val)
 
 int pop()
 {
-    if (top == -1)
+    if (top == -1) {
         cout << "Stack Underflow" << endl;
+        return -1;
+    }
     else
         return arr[top--];
 }
