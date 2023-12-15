@@ -2,7 +2,13 @@
     "files.associations": {
         "stdio.h": "c",
         "stdlib.h": "c",
-        "PCIMP.C": "cpp"
+        "PCIMP.C": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "new": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
