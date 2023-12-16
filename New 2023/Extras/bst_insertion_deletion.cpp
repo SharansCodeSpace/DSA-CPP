@@ -18,9 +18,55 @@ public:
 
 Node *root = NULL;
 
-
-void deleteBST(int data)
+Node *deleteBST(Node *root, int data)
 {
+    if (root == NULL)
+        return root;
+
+    if (root->data > data)
+    {
+        root->left = deleteBST(root->left, data);
+        return root;
+    }
+    else if (root->data < data)
+    {
+        root->right = deleteBST(root->right, data);
+        return root;
+    }
+
+    if (root->left == NULL)
+    {
+        Node *temp = root->right;
+        delete root;
+        return temp;
+    }
+    else if (root->right == NULL)
+    {
+        Node *temp = root->left;
+        delete root;
+        return temp;
+    }
+    else
+    {
+
+        Node *succParent = root;
+        Node *succ = root->right;
+        while (succ->left != NULL)
+        {
+            succParent = succ;
+            succ = succ->left;
+        }
+
+        if (succParent != root)
+            succParent->left = succ->right;
+        else
+            succParent->right = succ->right;
+
+        root->data = succ->data;
+
+        delete succ;
+        return root;
+    }
 }
 
 Node *insertRec(Node *root, int data)
@@ -32,7 +78,7 @@ Node *insertRec(Node *root, int data)
     }
     else if (data < root->data)
         root->left = insertRec(root->left, data);
-    else if (data < root->data)
+    else if (data > root->data)
         root->right = insertRec(root->right, data);
 
     return root;
@@ -59,6 +105,9 @@ int main()
     insertBST(5);
     insertBST(13);
     insertBST(3);
+    inorder(root);
+    cout << endl;
+    deleteBST(root, 5);
     inorder(root);
     return 0;
 }
